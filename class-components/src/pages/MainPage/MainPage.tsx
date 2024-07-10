@@ -1,9 +1,10 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import CardsField from '../../components/CardsField/CardsField';
 import { MainPageProps, Starship } from '../../interfaces/intrefaces';
 import SearchField from '../../components/SearchField/SearchField';
+import ErrorButton from '../../components/ErrorButton/ErrorButton';
 
-class MainPage extends Component<{}, MainPageProps> {
+class MainPage extends Component<MainPageProps> {
   state = {
     starships: [],
     loading: true,
@@ -40,7 +41,7 @@ class MainPage extends Component<{}, MainPageProps> {
     this.setState({ searchResults: results });
   };
 
-  render() {
+  render(): ReactNode {
     const { starships, loading, error, searchResults } = this.state;
     const cardsFieldProps: MainPageProps = {
       starships,
@@ -50,6 +51,7 @@ class MainPage extends Component<{}, MainPageProps> {
     };
     return (
       <>
+        <ErrorButton />
         <SearchField onSearchUpdate={this.updateSearchResults} />
         <CardsField {...cardsFieldProps} />
       </>

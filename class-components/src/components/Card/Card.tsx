@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import { Starship } from '../../interfaces/intrefaces';
 
 class Card extends Component<{ starship: Starship }> {
-  render() {
+  render(): ReactNode {
     const { starship } = this.props;
 
     return (

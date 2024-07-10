@@ -1,4 +1,4 @@
-import { ChangeEvent, Component } from 'react';
+import { ChangeEvent, Component, ReactNode } from 'react';
 import './SearchField.scss';
 import { SearchFieldProps } from '../../interfaces/intrefaces';
 import Loader from '../Loader/Loader';
@@ -41,13 +41,16 @@ class SearchField extends Component<SearchFieldProps> {
         `https://swapi.dev/api/starships/?search=${this.state.inputValue.trim()}`,
       );
       const data = await response.json();
-      this.setState({
-        searchResults: data.results,
-        isLoading: false,
-      }, () => {
-        this.props.onSearchUpdate(this.state.searchResults);
-        this.setHistory(this.state.inputValue.trim());
-      });
+      this.setState(
+        {
+          searchResults: data.results,
+          isLoading: false,
+        },
+        () => {
+          this.props.onSearchUpdate(this.state.searchResults);
+          this.setHistory(this.state.inputValue.trim());
+        },
+      );
       console.log(data.results);
     } catch (error) {
       console.error(error);
@@ -55,7 +58,7 @@ class SearchField extends Component<SearchFieldProps> {
     }
   };
 
-  render() {
+  render(): ReactNode {
     const { inputValue, searchHistory, isLoading } = this.state;
     return (
       <>
@@ -84,7 +87,7 @@ class SearchField extends Component<SearchFieldProps> {
             search
           </button>
         </form>
-        {isLoading ? (<Loader />) : false}
+        {isLoading ? <Loader /> : false}
       </>
     );
   }

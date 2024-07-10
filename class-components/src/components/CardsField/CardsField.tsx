@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import { MainPageProps } from '../../interfaces/intrefaces';
 import './CardsField.scss';
 import Card from '../Card/Card';
@@ -9,15 +9,13 @@ class CardsField extends Component<MainPageProps> {
     return localStorage.getItem('lastSearchQuery') || '';
   }
 
-  render() {
+  render(): ReactNode {
     const { starships, loading, error, searchResults } = this.props;
     const lastInputValue = this.getLastSearchQuery();
     const items = searchResults.length > 0 ? searchResults : starships;
 
     if (loading) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
 
     if (error) {

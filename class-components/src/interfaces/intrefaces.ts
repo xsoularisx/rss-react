@@ -1,3 +1,5 @@
+import { ErrorInfo } from 'react';
+
 export interface MainPageProps {
   starships: Starship[];
   loading: boolean;
@@ -24,4 +26,16 @@ export interface Starship {
 
 export interface SearchFieldProps {
   onSearchUpdate: (results: Starship[]) => void;
+}
+
+export interface ErrorButtonState {
+  hasError: boolean;
+}
+export interface ErrorBoundaryState {
+  error: Error | null;
+  errorInfo: ErrorInfo | null;
+}
+
+export interface ErrorBoundaryProps {
+  children: React.ReactNode;
 }

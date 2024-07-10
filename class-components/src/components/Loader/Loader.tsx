@@ -1,8 +1,8 @@
-import { Component } from 'react';
-import './Loader.scss'
+import { Component, ReactNode } from 'react';
+import './Loader.scss';
 
 class Loader extends Component {
-  render() {
+  render(): ReactNode {
     return (
       <div className="loading">
         <h2 className="loading__txt">loading</h2>

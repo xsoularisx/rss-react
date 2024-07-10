@@ -1,0 +1,50 @@
+.title {
+  font-size: 36px;
+  line-height: 48px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  color: rgb(25, 118, 210);
+  margin-top: 60px;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style-type: none;
+
+  &__item {
+    width: 40%;
+    padding: 15px;
+    border: 1px solid #cdcde6;
+    border-radius: 30px;
+    margin-top: 40px;
+
+    & h3 {
+      margin-bottom: 10px;
+    }
+
+    & span {
+      color: rgb(25, 118, 210);
+    }
+  }
+}
+
+.error {
+  text-align: center;
+  font-size: 36px;
+  line-height: 48px;
+  margin-top: 40px;
+  font-weight: 700;
+  color: rgb(211, 47, 47);
+}
+
+.no-results {
+  text-align: center;
+  font-size: 36px;
+  line-height: 48px;
+  margin-top: 40px;
+  font-weight: 700;
+  color: #444950;
+}

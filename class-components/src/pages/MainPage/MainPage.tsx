@@ -1,62 +1,51 @@
-import { Component, ReactNode } from 'react';
-import CardsField from '../../components/CardsField/CardsField';
+import { useState, useEffect } from 'react';
+import { CardsField } from '../../components/CardsField/CardsField';
 import { MainPageProps, Starship } from '../../interfaces/intrefaces';
-import SearchField from '../../components/SearchField/SearchField';
-import ErrorButton from '../../components/ErrorButton/ErrorButton';
+import { SearchField } from '../../components/SearchField/SearchField';
+import { ErrorButton } from '../../components/ErrorButton/ErrorButton';
 
-class MainPage extends Component<MainPageProps> {
-  state = {
-    starships: [],
-    loading: true,
-    error: null,
-    searchResults: [],
-  };
+export function MainPage() {
+  const [starships, setStarships] = useState<Starship[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchResults, setSearchResults] = useState<Starship[]>([]);
 
-  async componentDidMount() {
-    await this.fetchData();
-  }
+  useEffect(() => {
+    fetchData();
+    return () => {
+      localStorage.removeItem('lastSearchQuery');
+    };
+  }, []);
 
-  componentWillUnmount() {
-    localStorage.removeItem('lastSearchQuery');
-  }
-
-  fetchData = async () => {
+  async function fetchData() {
     try {
       const response = await fetch('https://swapi.dev/api/starships/');
       const data = await response.json();
-      this.setState({
-        starships: data.results,
-        loading: false,
-        error: null,
-      });
+      setStarships(data.results);
+      setLoading(false);
+      setError(null);
     } catch (error) {
-      this.setState({
-        loading: false,
-        error: error as string,
-      });
+      setLoading(false);
+      setError(error as string);
     }
-  };
-
-  updateSearchResults = (results: Starship[]) => {
-    this.setState({ searchResults: results });
-  };
-
-  render(): ReactNode {
-    const { starships, loading, error, searchResults } = this.state;
-    const cardsFieldProps: MainPageProps = {
-      starships,
-      loading,
-      error,
-      searchResults,
-    };
-    return (
-      <>
-        <ErrorButton />
-        <SearchField onSearchUpdate={this.updateSearchResults} />
-        <CardsField {...cardsFieldProps} />
-      </>
-    );
   }
-}
 
-export default MainPage;
+  function updateSearchResults(results: Starship[]) {
+    setSearchResults(results);
+  }
+
+  const cardsFieldProps: MainPageProps = {
+    starships,
+    loading,
+    error,
+    searchResults,
+  };
+
+  return (
+    <>
+      <ErrorButton />
+      <SearchField onSearchUpdate={updateSearchResults} />
+      <CardsField {...cardsFieldProps} />
+    </>
+  );
+}

@@ -1,28 +1,22 @@
-import { Component, ReactNode } from 'react';
-import { ErrorButtonState } from '../../interfaces/intrefaces';
 import './ErrorButton.scss';
+import { useState } from 'react';
 
-class ErrorButton extends Component<object, ErrorButtonState> {
-  state = {
-    hasError: false,
-  };
+export function ErrorButton() {
+  const [hasError, setHasError] = useState<boolean>(false);
 
-  handleClick = () => {
-    this.setState({ hasError: true });
-  };
-
-  render(): ReactNode {
-    if (this.state.hasError) {
-      throw new Error();
-    }
-    return (
-      <div className="error__container">
-        <button className="error__button" onClick={() => this.handleClick()}>
-          throw error
-        </button>
-      </div>
-    );
+  function handleClick() {
+    setHasError(true);
   }
-}
 
-export default ErrorButton;
+  if (hasError) {
+    throw new Error();
+  }
+
+  return (
+    <div className="error__container">
+      <button className="error__button" onClick={handleClick}>
+        throw error
+      </button>
+    </div>
+  );
+}

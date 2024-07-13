@@ -1,6 +1,6 @@
 import './App.css';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import MainPage from './pages/MainPage/MainPage';
+import { MainPage } from './pages/MainPage/MainPage';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { MainPageProps } from '../../interfaces/intrefaces';
 import './CardsField.scss';
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 import Loader from '../Loader/Loader';
 
 class CardsField extends Component<MainPageProps> {

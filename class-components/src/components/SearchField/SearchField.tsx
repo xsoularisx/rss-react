@@ -2,16 +2,18 @@ import './SearchField.scss';
 import { ChangeEvent, useState, useEffect } from 'react';
 import { SearchFieldProps } from '../../interfaces/intrefaces';
 import { Loader } from '../Loader/Loader';
+import { useNavigate} from 'react-router-dom';
 
 export function SearchField({ onSearchUpdate }: SearchFieldProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>(getHistory());
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSearchHistory(getHistory());
-  }, [inputValue]);
+  }, [inputValue, searchResults]);
 
   function setHistory(query: string) {
     localStorage.setItem('lastSearchQuery', query);
@@ -42,11 +44,11 @@ export function SearchField({ onSearchUpdate }: SearchFieldProps) {
     try {
       let url;
       if (inputValue.trim() === '') {
-        url = `https://swapi.dev/api/starships/?page=1`;
+        navigate(`?page=1`)
       } else {
         url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
       }
-      const response = await fetch(url);
+      const response = await fetch(url as string);
       const data = await response.json();
       setSearchResults(data.results);
       setIsLoading(false);

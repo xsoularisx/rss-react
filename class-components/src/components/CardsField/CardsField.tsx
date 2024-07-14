@@ -14,6 +14,7 @@ export function CardsField({
   searchResults,
 }: MainPageProps) {
   const lastInputValue = getLastSearchQuery();
+  console.log(lastInputValue);
   const items = searchResults.length > 0 ? searchResults : starships;
 
   if (loading) {
@@ -24,7 +25,7 @@ export function CardsField({
     return <h2 className="error">error: {error}</h2>;
   }
 
-  if (searchResults.length === 0 && lastInputValue !== '') {
+  if (searchResults.length === 0 && starships.length === 0) {
     return (
       <>
         <h1 className="title">starships</h1>

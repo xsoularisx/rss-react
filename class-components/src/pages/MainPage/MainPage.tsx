@@ -35,8 +35,9 @@ export function MainPage() {
       let url;
       if (query === '') {
         url = `https://swapi.dev/api/starships/?page=${page}`;
+        navigate(`?page=${page}`)
       } else {
-        url = `https://swapi.dev/api/starships/?page=${page}&search=${query}`;
+        url = `https://swapi.dev/api/starships/?search=${query}`;
       }
       const response = await fetch(url);
       const data = await response.json();

@@ -2,7 +2,7 @@ import './SearchField.scss';
 import { ChangeEvent, useState, useEffect } from 'react';
 import { SearchFieldProps } from '../../interfaces/intrefaces';
 import { Loader } from '../Loader/Loader';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function SearchField({ onSearchUpdate }: SearchFieldProps) {
   const [inputValue, setInputValue] = useState<string>('');
@@ -44,7 +44,7 @@ export function SearchField({ onSearchUpdate }: SearchFieldProps) {
     try {
       let url;
       if (inputValue.trim() === '') {
-        navigate(`?page=1`)
+        navigate(`?page=1`);
       } else {
         url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
       }

@@ -35,7 +35,7 @@ export function MainPage() {
       let url;
       if (query === '') {
         url = `https://swapi.dev/api/starships/?page=${page}`;
-        navigate(`?page=${page}`)
+        navigate(`?page=${page}`);
       } else {
         url = `https://swapi.dev/api/starships/?search=${query}`;
       }

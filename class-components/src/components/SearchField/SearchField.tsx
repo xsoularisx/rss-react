@@ -42,19 +42,21 @@ export function SearchField({ onSearchUpdate }: SearchFieldProps) {
   async function handleSearch() {
     setIsLoading(true);
     try {
-      let url;
       if (inputValue.trim() === '') {
+        setSearchResults([]);
+        onSearchUpdate([], inputValue);
+        setIsLoading(false);
         navigate(`?page=1`);
-      } else {
-        url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
+        return;
       }
-      const response = await fetch(url as string);
+
+      const url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
+      const response = await fetch(url);
       const data = await response.json();
       setSearchResults(data.results);
       setIsLoading(false);
       onSearchUpdate(data.results, inputValue);
       setHistory(inputValue.trim());
-      console.log(searchResults);
     } catch (error) {
       console.error(error);
       setIsLoading(false);

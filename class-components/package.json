@@ -17,11 +17,6 @@
       "pre-commit": "lint-staged"
     }
   },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run format:fix",
@@ -36,9 +31,11 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.24.7",
+    "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@testing-library/dom": "^10.3.1",
+    "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.3.3",

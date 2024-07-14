@@ -20,25 +20,22 @@ export function MainPage() {
 
   useEffect(() => {
     const page = searchParams.get('page');
-    const query = searchParams.get('query') || '';
+    const query =
+      searchParams.get('query') ||
+      localStorage.getItem('lastSearchQuery') ||
+      '';
     setCurrentPage(page ? parseInt(page) : 1);
     setSearchQuery(query);
     fetchData(page ? parseInt(page) : 1, query);
     return () => {
       localStorage.removeItem('lastSearchQuery');
     };
-  }, [searchParams]);
+  }, [searchParams, searchQuery, searchResults, currentPage]);
 
   async function fetchData(page = 1, query = '') {
     try {
       setLoading(true);
-      let url;
-      if (query === '') {
-        url = `https://swapi.dev/api/starships/?page=${page}`;
-        navigate(`?page=${page}`);
-      } else {
-        url = `https://swapi.dev/api/starships/?search=${query}`;
-      }
+      const url = `https://swapi.dev/api/starships/?search=${query}&page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
       setStarships(data.results);
@@ -55,13 +52,20 @@ export function MainPage() {
     setSearchResults(results);
     setCountStarships(results.length);
     setCurrentPage(1);
-    setSearchQuery(query);
-    navigate(`?query=${query}`);
+    setSearchQuery(query || '');
+    localStorage.setItem('lastSearchQuery', query);
+    navigate(`?query=${query}&page=1`);
   }
 
   function handlePageChange(page: number) {
     setCurrentPage(page);
-    navigate(`?page=${page}`);
+    const query = searchParams.get('query') || '';
+    if (query === '') {
+      navigate(`?page=${page}`);
+    } else {
+      localStorage.setItem('lastSearchQuery', query);
+      navigate(`?query=${query}&page=${page}`);
+    }
   }
 
   const cardsFieldProps: MainPageProps = {

@@ -11,7 +11,7 @@ export function SearchField({ onSearchUpdate }: SearchFieldProps) {
 
   useEffect(() => {
     setSearchHistory(getHistory());
-  }, []);
+  }, [inputValue]);
 
   function setHistory(query: string) {
     localStorage.setItem('lastSearchQuery', query);
@@ -40,15 +40,19 @@ export function SearchField({ onSearchUpdate }: SearchFieldProps) {
   async function handleSearch() {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `https://swapi.dev/api/starships/?search=${inputValue.trim()}`,
-      );
+      let url;
+      if (inputValue.trim() === '') {
+        url = `https://swapi.dev/api/starships/?page=1`;
+      } else {
+        url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
+      }
+      const response = await fetch(url);
       const data = await response.json();
       setSearchResults(data.results);
       setIsLoading(false);
-      onSearchUpdate(data.results);
-      console.log(searchResults);
+      onSearchUpdate(data.results, inputValue);
       setHistory(inputValue.trim());
+      console.log(searchResults);
     } catch (error) {
       console.error(error);
       setIsLoading(false);

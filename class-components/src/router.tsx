@@ -1,23 +1,29 @@
-import { createBrowserRouter } from "react-router-dom";
-import { MainPage } from "./pages/MainPage/MainPage";
-import { Page404 } from "./pages/Page404/Page404";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import { createBrowserRouter } from 'react-router-dom';
+import { MainPage } from './pages/MainPage/MainPage';
+import { Page404 } from './pages/Page404/Page404';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
-const router = createBrowserRouter(
-  [
-    {
-      path: '/',
-      element: (
-        <ErrorBoundary>
-          <MainPage />
-        </ErrorBoundary>
-      ),
-    },
-    {
-      path: '*',
-      element: <Page404 />,
-    },
-  ]
-)
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <ErrorBoundary>
+        <MainPage />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: '/page/:pageNumber',
+    element: (
+      <ErrorBoundary>
+        <MainPage />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: '*',
+    element: <Page404 />,
+  },
+]);
 
-export default router
+export default router;

@@ -25,12 +25,10 @@ export interface Starship {
 }
 
 export interface SearchFieldProps {
-  onSearchUpdate: (results: Starship[]) => void;
+  onSearchUpdate: (results: Starship[], query: string) => void;
+  searchQuery: string;
 }
 
-export interface ErrorButtonState {
-  hasError: boolean;
-}
 export interface ErrorBoundaryState {
   error: Error | null;
   errorInfo: ErrorInfo | null;
@@ -38,4 +36,10 @@ export interface ErrorBoundaryState {
 
 export interface ErrorBoundaryProps {
   children: React.ReactNode;
+}
+
+export interface PaginationProps {
+  count: number;
+  currentPage: number;
+  onPageChange: (pageNumber: number) => void;
 }

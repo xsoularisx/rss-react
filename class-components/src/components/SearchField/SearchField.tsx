@@ -1,96 +1,96 @@
-import { ChangeEvent, Component, ReactNode } from 'react';
 import './SearchField.scss';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { SearchFieldProps } from '../../interfaces/intrefaces';
-import Loader from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
-class SearchField extends Component<SearchFieldProps> {
-  setHistory = (query: string) => {
+export function SearchField({ onSearchUpdate }: SearchFieldProps) {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchHistory, setSearchHistory] = useState<string[]>(getHistory());
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setSearchHistory(getHistory());
+  }, [inputValue, searchResults]);
+
+  function setHistory(query: string) {
     localStorage.setItem('lastSearchQuery', query);
-    const searchHistory = this.getHistory();
-    if (searchHistory.includes(query)) {
-      localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-      this.setState({ searchHistory });
+    const history = getHistory();
+    if (history.includes(query)) {
+      localStorage.setItem('searchHistory', JSON.stringify(history));
+      setSearchHistory(history);
       return;
     }
 
-    const updatedHistory = [...searchHistory, query];
-    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
-    this.setState({ searchHistory: updatedHistory });
-  };
+    const updatedHistory = [...history, query];
 
-  getHistory = (): string[] => {
+    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+    setSearchHistory(updatedHistory);
+  }
+
+  function getHistory(): string[] {
     const searchHistory = localStorage.getItem('searchHistory');
     return searchHistory ? JSON.parse(searchHistory) : [];
-  };
+  }
 
-  state = {
-    inputValue: '',
-    searchResults: [],
-    searchHistory: this.getHistory(),
-    isLoading: false,
-  };
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setInputValue(event.target.value);
+  }
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: event.target.value });
-  };
-
-  handleSearch = async () => {
-    this.setState({ isLoading: true });
+  async function handleSearch() {
+    setIsLoading(true);
     try {
-      const response = await fetch(
-        `https://swapi.dev/api/starships/?search=${this.state.inputValue.trim()}`,
-      );
+      if (inputValue.trim() === '') {
+        setSearchResults([]);
+        onSearchUpdate([], inputValue);
+        setIsLoading(false);
+        navigate(`?page=1`);
+        return;
+      }
+
+      const url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
+      const response = await fetch(url);
       const data = await response.json();
-      this.setState(
-        {
-          searchResults: data.results,
-          isLoading: false,
-        },
-        () => {
-          this.props.onSearchUpdate(this.state.searchResults);
-          this.setHistory(this.state.inputValue.trim());
-        },
-      );
-      console.log(data.results);
+      setSearchResults(data.results);
+      setIsLoading(false);
+      onSearchUpdate(data.results, inputValue);
+      setHistory(inputValue.trim());
     } catch (error) {
       console.error(error);
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
-  };
-
-  render(): ReactNode {
-    const { inputValue, searchHistory, isLoading } = this.state;
-    return (
-      <>
-        <h1 className="search__title">search</h1>
-        <form
-          className="search"
-          onSubmit={e => {
-            e.preventDefault();
-            this.handleSearch();
-          }}
-        >
-          <input
-            className="search__input"
-            type="text"
-            placeholder="enter your request"
-            value={inputValue}
-            onChange={this.handleInputChange}
-            list="search-history"
-          />
-          <datalist id="search-history">
-            {searchHistory.map((query, index) => (
-              <option key={index} value={query} />
-            ))}
-          </datalist>
-          <button className="search__button" type="submit">
-            search
-          </button>
-        </form>
-        {isLoading ? <Loader /> : false}
-      </>
-    );
   }
-}
 
-export default SearchField;
+  return (
+    <>
+      <h1 className="search__title">search</h1>
+      <form
+        className="search"
+        onSubmit={e => {
+          e.preventDefault();
+          handleSearch();
+        }}
+      >
+        <input
+          className="search__input"
+          type="text"
+          placeholder="enter your request"
+          value={inputValue}
+          onChange={handleInputChange}
+          list="search-history"
+        />
+        <datalist id="search-history">
+          {searchHistory.map((query, index) => (
+            <option key={index} value={query} />
+          ))}
+        </datalist>
+        <button className="search__button" type="submit">
+          search
+        </button>
+      </form>
+      {isLoading ? <Loader /> : false}
+    </>
+  );
+}

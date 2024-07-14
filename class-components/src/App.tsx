@@ -1,15 +1,9 @@
 import './App.css';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import MainPage from './pages/MainPage/MainPage';
+import { RouterProvider } from 'react-router-dom';
+import router from './router.tsx';
 
 function App() {
-  return (
-    <>
-      <ErrorBoundary>
-        <MainPage />
-      </ErrorBoundary>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,10 +1,30 @@
 import { ErrorInfo } from 'react';
 
+export interface MainPageState {
+  starships: Starship[];
+  loading: boolean;
+  error: string | null;
+  count: number;
+  currentPage: number;
+}
+
 export interface MainPageProps {
   starships: Starship[];
   loading: boolean;
   error: string | null;
   searchResults: Starship[];
+}
+
+export interface FetchStarshipsParams {
+  query: string;
+  page: number;
+}
+
+export interface FetchStarshipsResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: never[];
 }
 
 export interface Starship {

@@ -3,11 +3,7 @@ import { MainPageProps } from '../../interfaces/intrefaces';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
 
-export function CardsField({
-  starships,
-  loading,
-  error,
-}: MainPageProps) {
+export function CardsField({ starships, loading, error }: MainPageProps) {
   const items = starships;
 
   if (loading) {

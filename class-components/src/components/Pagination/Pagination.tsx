@@ -1,5 +1,5 @@
-import './Pagination.scss';
 import { PaginationProps } from '../../interfaces/intrefaces';
+import './Pagination.scss';
 
 export function Pagination({
   count,

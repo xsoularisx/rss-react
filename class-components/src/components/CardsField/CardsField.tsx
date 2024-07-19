@@ -7,9 +7,8 @@ export function CardsField({
   starships,
   loading,
   error,
-  searchResults,
 }: MainPageProps) {
-  const items = searchResults.length > 0 ? searchResults : starships;
+  const items = starships;
 
   if (loading) {
     return <Loader />;
@@ -19,7 +18,7 @@ export function CardsField({
     return <h2 className="error">error: {error}</h2>;
   }
 
-  if (searchResults.length === 0 && starships.length === 0) {
+  if (items.length === 0 && starships.length === 0) {
     return (
       <>
         <h1 className="title">starships</h1>
@@ -39,5 +38,3 @@ export function CardsField({
     </>
   );
 }
-
-export default CardsField;

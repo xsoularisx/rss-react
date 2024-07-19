@@ -1,4 +1,5 @@
 import { Starship } from '../../interfaces/intrefaces';
+import './Card.scss';
 
 export function Card({ starship }: { starship: Starship }) {
   return (

@@ -4,9 +4,7 @@ import './Card.scss';
 export function Card({ starship }: { starship: Starship }) {
   return (
     <li className="field__item">
-      <h3>
-        Name: <span>{starship.name}</span>
-      </h3>
+      <h3>Name: {starship.name}</h3>
       <p>Model: {starship.model}</p>
       <p>Manufacturer: {starship.manufacturer}</p>
       <p>Cost: {starship.cost_in_credits} credits</p>

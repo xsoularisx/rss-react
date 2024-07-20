@@ -63,3 +63,8 @@ export interface PaginationProps {
   currentPage: number;
   onPageChange: (pageNumber: number) => void;
 }
+
+export interface ThemeContextType {
+  theme: string;
+  toggleTheme: () => void;
+}

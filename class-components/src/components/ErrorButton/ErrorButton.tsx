@@ -13,7 +13,7 @@ export function ErrorButton() {
   }
 
   return (
-    <div className="error__container">
+    <div className="container">
       <button className="error__button" onClick={handleClick}>
         throw error
       </button>

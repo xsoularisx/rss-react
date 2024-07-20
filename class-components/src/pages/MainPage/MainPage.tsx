@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardsField } from '../../components/CardsField/CardsField';
@@ -14,6 +14,8 @@ import {
 } from './MainPageSlice';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { FetchStarshipsParams } from '../../interfaces/intrefaces';
+import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
+import { ThemeContext } from '../../components/ThemeProvider/ThemeProvider';
 
 export function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,9 +43,12 @@ export function MainPage() {
     setSearchParams({ query: newQuery, page: '1' });
   };
 
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <>
+    <div className={`${theme}`}>
       <ErrorButton />
+      <ThemeToggle />
       <SearchField onSearch={handleSearch} />
       <Pagination
         count={count}
@@ -56,6 +61,6 @@ export function MainPage() {
         error={error}
         searchResults={[]}
       />
-    </>
+    </div>
   );
 }

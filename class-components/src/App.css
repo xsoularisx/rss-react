@@ -4,3 +4,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.container {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.light {
+  background-color: rgb(223, 226, 231);
+  color: rgb(15, 23, 31);
+}
+
+.dark {
+  background-color: rgb(15, 23, 31);
+  color: rgb(223, 226, 231);
+}

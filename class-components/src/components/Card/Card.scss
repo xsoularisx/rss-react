@@ -5,6 +5,7 @@
     border: 1px solid #cdcde6;
     border-radius: 30px;
     margin-top: 40px;
+    cursor: pointer;
 
     & h3 {
       margin-bottom: 10px;
@@ -14,14 +15,4 @@
       color: rgb(25, 118, 210);
     }
   }
-}
-
-.light {
-  background-color: white;
-  color: black;
-}
-
-.dark {
-  background-color: black;
-  color: white;
 }

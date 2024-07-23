@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/pages/Page404/Page404.tsx</title>
+    <title>Code coverage report for src/components/CardDetailed/CardDetailed.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/pages/Page404</a> Page404.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/CardDetailed</a> CardDetailed.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -81,43 +81,52 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import './Page404.scss';
-import { useNavigate } from 'react-router-dom';
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import './CardDetailed.scss'
+import { CardDetailedProps } from "../../interfaces/intrefaces";
 &nbsp;
-export function Page404() {
-  const navigate = useNavigate();
-<span class="fstat-no" title="function not covered" >  function returnMainPage() {</span>
-<span class="cstat-no" title="statement not covered" >    navigate('/');</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+export function CardDetailed({ starship }: CardDetailedProps) {
   return (
-    &lt;div className="page404"&gt;
-      &lt;h1 className="page404__title"&gt;404&lt;/h1&gt;
-      &lt;p className="page404__text"&gt;page not found&lt;/p&gt;
-      &lt;button className="page404__button" onClick={returnMainPage}&gt;
-        return main page
-      &lt;/button&gt;
+    &lt;div className="card__detailed"&gt;
+      &lt;h3&gt;Name: {starship.name}&lt;/h3&gt;
+      &lt;p&gt;Model: {starship.model}&lt;/p&gt;
+      &lt;p&gt;Manufacturer: {starship.manufacturer}&lt;/p&gt;
+      &lt;p&gt;Cost: {starship.cost_in_credits} credits&lt;/p&gt;
+      &lt;p&gt;Length: {starship.length} meters&lt;/p&gt;
+      &lt;p&gt;Max Speed: {starship.max_atmosphering_speed} km/h&lt;/p&gt;
+      &lt;p&gt;Crew: {starship.crew}&lt;/p&gt;
+      &lt;p&gt;Passengers: {starship.passengers}&lt;/p&gt;
+      &lt;p&gt;Cargo Capacity: {starship.cargo_capacity} kg&lt;/p&gt;
+      &lt;p&gt;Consumables: {starship.consumables}&lt;/p&gt;
+      &lt;p&gt;Hyperdrive Rating: {starship.hyperdrive_rating}&lt;/p&gt;
+      &lt;p&gt;MGLT: {starship.MGLT}&lt;/p&gt;
+      &lt;p&gt;Starship Class: {starship.starship_class}&lt;/p&gt;
     &lt;/div&gt;
   );
-}
-&nbsp;</pre></td></tr></table></pre>
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './SearchField.scss';
 
 interface SearchFieldProps {
@@ -13,8 +13,16 @@ export function SearchField({ onSearch }: SearchFieldProps) {
   };
 
   const handleSearch = () => {
+    localStorage.setItem('searchQuery', searchQuery);
     onSearch(searchQuery);
   };
+
+  useEffect(() => {
+    const storedQuery = localStorage.getItem('searchQuery');
+    if (storedQuery) {
+      setSearchQuery(storedQuery);
+    }
+  }, []);
 
   return (
     <>

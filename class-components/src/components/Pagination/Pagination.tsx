@@ -1,4 +1,5 @@
 import { PaginationProps } from '../../interfaces/intrefaces';
+import { useNavigate } from 'react-router-dom';
 import './Pagination.scss';
 
 export function Pagination({
@@ -8,8 +9,10 @@ export function Pagination({
 }: PaginationProps) {
   const itemsPerPage = 10;
   const totalPages = Math.ceil(count / itemsPerPage);
+  const navigate = useNavigate();
 
   function handlePageChange(pageNumber: number) {
+    navigate(`?page=${pageNumber}`);
     onPageChange(pageNumber);
   }
 

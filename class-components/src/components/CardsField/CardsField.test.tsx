@@ -35,7 +35,7 @@ describe('CardsField', () => {
       MGLT: '75',
       starship_class: 'Light freighter',
       url: '',
-    }
+    },
   ];
 
   it('should display the correct number of cards', () => {

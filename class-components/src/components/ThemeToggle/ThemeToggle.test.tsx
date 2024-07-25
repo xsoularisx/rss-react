@@ -6,9 +6,9 @@ import { ThemeContext } from '../ThemeProvider/ThemeProvider';
 describe('ThemeToggle', () => {
   it('should display the correct button text based on the current theme', () => {
     const { getByText } = render(
-      <ThemeContext.Provider value={{ theme: 'light', toggleTheme: () => { } }}>
+      <ThemeContext.Provider value={{ theme: 'light', toggleTheme: () => {} }}>
         <ThemeToggle />
-      </ThemeContext.Provider>
+      </ThemeContext.Provider>,
     );
 
     expect(getByText('toggle dark theme')).toBeInTheDocument();
@@ -17,9 +17,11 @@ describe('ThemeToggle', () => {
   it('should call the toggleTheme function when the button is clicked', () => {
     const mockToggleTheme = vi.fn();
     const { getByText } = render(
-      <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggleTheme }}>
+      <ThemeContext.Provider
+        value={{ theme: 'light', toggleTheme: mockToggleTheme }}
+      >
         <ThemeToggle />
-      </ThemeContext.Provider>
+      </ThemeContext.Provider>,
     );
 
     fireEvent.click(getByText('toggle dark theme'));

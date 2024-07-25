@@ -8,7 +8,9 @@ import { Starship } from '../../interfaces/intrefaces';
 
 export function CardsField({ starships, loading, error }: MainPageProps) {
   const items = starships;
-  const [selectedStarship, setSelectedStarship] = useState<Starship | null>(null);
+  const [selectedStarship, setSelectedStarship] = useState<Starship | null>(
+    null,
+  );
 
   if (loading) {
     return <Loader />;
@@ -39,12 +41,16 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
   }
 
   return (
-    <div className='main'>
+    <div className="main">
       <h1 className="title">starships</h1>
-      <div className='field__container'>
+      <div className="field__container">
         <ul className="field">
           {items.map(starship => (
-            <Card key={starship.url} starship={starship} onCardClick={handleCardClick} />
+            <Card
+              key={starship.url}
+              starship={starship}
+              onCardClick={handleCardClick}
+            />
           ))}
         </ul>
         {selectedStarship && <CardDetailed starship={selectedStarship} />}

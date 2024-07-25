@@ -1,5 +1,5 @@
-import './CardDetailed.scss'
-import { CardDetailedProps } from "../../interfaces/intrefaces";
+import './CardDetailed.scss';
+import { CardDetailedProps } from '../../interfaces/intrefaces';
 
 export function CardDetailed({ starship }: CardDetailedProps) {
   return (

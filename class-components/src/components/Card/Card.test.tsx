@@ -15,7 +15,9 @@ describe('Card component', () => {
     render(<Card starship={mockStarship} onCardClick={onCardClickMock} />);
 
     expect(screen.getByText('Name: Millennium Falcon')).toBeInTheDocument();
-    expect(screen.getByText('Model: YT-1300 light freighter')).toBeInTheDocument();
+    expect(
+      screen.getByText('Model: YT-1300 light freighter'),
+    ).toBeInTheDocument();
   });
 
   it('should call the onCardClick function with the correct argument', () => {

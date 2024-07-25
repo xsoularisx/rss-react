@@ -7,7 +7,7 @@ import {
   FetchStarshipsResponse,
 } from '../../interfaces/intrefaces';
 
-const initialState: MainPageState = {
+export const initialState: MainPageState = {
   starships: [],
   loading: false,
   error: null,

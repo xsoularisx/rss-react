@@ -24,8 +24,12 @@ describe('CardDetailed component', () => {
     render(<CardDetailed starship={mockStarship} />);
 
     expect(screen.getByText('Name: Millennium Falcon')).toBeInTheDocument();
-    expect(screen.getByText('Model: YT-1300 light freighter')).toBeInTheDocument();
-    expect(screen.getByText('Manufacturer: Corellian Engineering Corporation')).toBeInTheDocument();
+    expect(
+      screen.getByText('Model: YT-1300 light freighter'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Manufacturer: Corellian Engineering Corporation'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Cost: 100000 credits')).toBeInTheDocument();
     expect(screen.getByText('Length: 34.37 meters')).toBeInTheDocument();
     expect(screen.getByText('Max Speed: 1050 km/h')).toBeInTheDocument();
@@ -35,6 +39,8 @@ describe('CardDetailed component', () => {
     expect(screen.getByText('Consumables: 2 months')).toBeInTheDocument();
     expect(screen.getByText('Hyperdrive Rating: 0.5')).toBeInTheDocument();
     expect(screen.getByText('MGLT: 75')).toBeInTheDocument();
-    expect(screen.getByText('Starship Class: Light freighter')).toBeInTheDocument();
+    expect(
+      screen.getByText('Starship Class: Light freighter'),
+    ).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Page404 } from './Page404';
 
@@ -8,7 +8,7 @@ describe('Page404', () => {
     render(
       <MemoryRouter>
         <Page404 />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByText('404')).toBeInTheDocument();

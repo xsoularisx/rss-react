@@ -2,14 +2,15 @@ import './CardsField.scss';
 import { MainPageProps } from '../../interfaces/intrefaces';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CardDetailed } from '../CardDetailed/CardDetailed';
-import { Starship } from '../../interfaces/intrefaces';
+import { setDetailedCard } from '../CardDetailed/CardDetailedSlice';
+import { RootState } from '../../store';
 
 export function CardsField({ starships, loading, error }: MainPageProps) {
-  const items = starships;
-  const [selectedStarship, setSelectedStarship] = useState<Starship | null>(
-    null,
+  const dispatch = useDispatch();
+  const detailedCard = useSelector(
+    (state: RootState) => state.detailedCard.data,
   );
 
   if (loading) {
@@ -20,7 +21,7 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
     return <h2 className="error">error: {error}</h2>;
   }
 
-  if (items.length === 0 && starships.length === 0) {
+  if (starships.length === 0 && starships.length === 0) {
     return (
       <>
         <h1 className="title">starships</h1>
@@ -33,11 +34,10 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setSelectedStarship(data);
+      dispatch(setDetailedCard(data));
     } catch (error) {
       console.error(error);
     }
-    console.log(selectedStarship);
   }
 
   return (
@@ -45,7 +45,7 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
       <h1 className="title">starships</h1>
       <div className="field__container">
         <ul className="field">
-          {items.map(starship => (
+          {starships.map(starship => (
             <Card
               key={starship.url}
               starship={starship}
@@ -53,7 +53,7 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
             />
           ))}
         </ul>
-        {selectedStarship && <CardDetailed starship={selectedStarship} />}
+        {detailedCard && <CardDetailed starship={detailedCard} />}
       </div>
     </div>
   );

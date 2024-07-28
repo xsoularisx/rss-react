@@ -28,6 +28,7 @@ export interface FetchStarshipsResponse {
 }
 
 export interface Starship {
+  data: Starship;
   url?: string;
   name: string;
   model: string;

@@ -1,15 +1,18 @@
 import './CardsField.scss';
-import { MainPageProps } from '../../interfaces/intrefaces';
+import { MainPageProps, Starship } from '../../interfaces/intrefaces';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardDetailed } from '../CardDetailed/CardDetailed';
-import { setDetailedCard } from '../CardDetailed/CardDetailedSlice';
+import {
+  setDetailedCards,
+  removeDetailedCards,
+} from '../CardDetailed/CardDetailedSlice';
 import { RootState } from '../../store';
 
 export function CardsField({ starships, loading, error }: MainPageProps) {
   const dispatch = useDispatch();
-  const detailedCard = useSelector(
+  const detailedCards = useSelector(
     (state: RootState) => state.detailedCard.data,
   );
 
@@ -34,7 +37,13 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      dispatch(setDetailedCard(data));
+      if (
+        detailedCards.some((card: { url: string }) => card.url === data.url)
+      ) {
+        dispatch(removeDetailedCards(data.url));
+      } else {
+        dispatch(setDetailedCards(data));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -53,7 +62,11 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
             />
           ))}
         </ul>
-        {detailedCard && <CardDetailed starship={detailedCard} />}
+        <div className="field__detailed">
+          {detailedCards.map((starship: Starship) => (
+            <CardDetailed key={starship.url} starship={starship} />
+          ))}
+        </div>
       </div>
     </div>
   );

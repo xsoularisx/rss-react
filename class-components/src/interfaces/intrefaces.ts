@@ -28,6 +28,10 @@ export interface FetchStarshipsResponse {
 }
 
 export interface Starship {
+  map(
+    arg0: (starship: Starship) => import('react/jsx-runtime').JSX.Element,
+  ): import('react').ReactNode;
+  some(arg0: (card: { url: string }) => boolean): unknown;
   data: Starship;
   url?: string;
   name: string;
@@ -77,4 +81,8 @@ export interface PaginationProps {
 export interface ThemeContextType {
   theme: string;
   toggleTheme: () => void;
+}
+
+export interface CardDetailedState {
+  data: Starship[];
 }

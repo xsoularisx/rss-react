@@ -1,16 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CardDetailedState, Starship } from '../../interfaces/intrefaces';
 
-const detailedCardSlice = createSlice({
-  name: 'detailedCard',
-  initialState: {
-    data: null,
-  },
+const initialState: CardDetailedState = {
+  data: [],
+};
+
+const cardDetailedSlice = createSlice({
+  name: 'detailedCards',
+  initialState,
   reducers: {
-    setDetailedCard: (state, action) => {
-      state.data = action.payload;
+    setDetailedCards: (state, action: PayloadAction<Starship>) => {
+      if (!state.data.some(card => card.url === action.payload.url)) {
+        state.data.push(action.payload);
+      }
+    },
+    removeDetailedCards: (state, action: PayloadAction<string>) => {
+      state.data = state.data.filter(card => card.url !== action.payload);
     },
   },
 });
 
-export const { setDetailedCard } = detailedCardSlice.actions;
-export default detailedCardSlice.reducer;
+export const { setDetailedCards, removeDetailedCards } =
+  cardDetailedSlice.actions;
+export default cardDetailedSlice.reducer;

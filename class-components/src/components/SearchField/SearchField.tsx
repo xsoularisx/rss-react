@@ -1,96 +1,45 @@
+import { useState, useEffect } from 'react';
 import './SearchField.scss';
-import { ChangeEvent, useState, useEffect } from 'react';
-import { SearchFieldProps } from '../../interfaces/intrefaces';
-import { Loader } from '../Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 
-export function SearchField({ onSearchUpdate }: SearchFieldProps) {
-  const [inputValue, setInputValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<string[]>([]);
-  const [searchHistory, setSearchHistory] = useState<string[]>(getHistory());
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
+interface SearchFieldProps {
+  onSearch: (query: string) => void;
+}
+
+export function SearchField({ onSearch }: SearchFieldProps) {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearch = () => {
+    localStorage.setItem('searchQuery', searchQuery);
+    onSearch(searchQuery);
+  };
 
   useEffect(() => {
-    setSearchHistory(getHistory());
-  }, [inputValue, searchResults]);
-
-  function setHistory(query: string) {
-    localStorage.setItem('lastSearchQuery', query);
-    const history = getHistory();
-    if (history.includes(query)) {
-      localStorage.setItem('searchHistory', JSON.stringify(history));
-      setSearchHistory(history);
-      return;
+    const storedQuery = localStorage.getItem('searchQuery');
+    if (storedQuery) {
+      setSearchQuery(storedQuery);
     }
-
-    const updatedHistory = [...history, query];
-
-    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
-    setSearchHistory(updatedHistory);
-  }
-
-  function getHistory(): string[] {
-    const searchHistory = localStorage.getItem('searchHistory');
-    return searchHistory ? JSON.parse(searchHistory) : [];
-  }
-
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setInputValue(event.target.value);
-  }
-
-  async function handleSearch() {
-    setIsLoading(true);
-    try {
-      if (inputValue.trim() === '') {
-        setSearchResults([]);
-        onSearchUpdate([], inputValue);
-        setIsLoading(false);
-        navigate(`?page=1`);
-        return;
-      }
-
-      const url = `https://swapi.dev/api/starships/?search=${inputValue.trim()}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setSearchResults(data.results);
-      setIsLoading(false);
-      onSearchUpdate(data.results, inputValue);
-      setHistory(inputValue.trim());
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
-  }
+  }, []);
 
   return (
     <>
       <h1 className="search__title">search</h1>
-      <form
-        className="search"
-        onSubmit={e => {
-          e.preventDefault();
-          handleSearch();
-        }}
-      >
+
+      <div className="search">
         <input
           className="search__input"
           type="text"
-          placeholder="enter your request"
-          value={inputValue}
+          value={searchQuery}
           onChange={handleInputChange}
-          list="search-history"
+          placeholder="enter your request"
         />
-        <datalist id="search-history">
-          {searchHistory.map((query, index) => (
-            <option key={index} value={query} />
-          ))}
-        </datalist>
-        <button className="search__button" type="submit">
-          search
+        <button className="search__button" onClick={handleSearch}>
+          Search
         </button>
-      </form>
-      {isLoading ? <Loader /> : false}
+      </div>
     </>
   );
 }

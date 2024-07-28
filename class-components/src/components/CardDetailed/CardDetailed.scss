@@ -1,0 +1,12 @@
+.card__detailed {
+  width: 400px;
+  padding: 15px;
+  border: 1px solid #cdcde6;
+  border-radius: 30px;
+  margin-top: 40px;
+  cursor: pointer;
+
+  & h3 {
+    margin-bottom: 10px;
+  }
+}

@@ -17,9 +17,12 @@ const cardDetailedSlice = createSlice({
     removeDetailedCards: (state, action: PayloadAction<string>) => {
       state.data = state.data.filter(card => card.url !== action.payload);
     },
+    removeDetailedAllCards: (state) => {
+      state.data = [];
+    },
   },
 });
 
-export const { setDetailedCards, removeDetailedCards } =
+export const { setDetailedCards, removeDetailedCards, removeDetailedAllCards } =
   cardDetailedSlice.actions;
 export default cardDetailedSlice.reducer;

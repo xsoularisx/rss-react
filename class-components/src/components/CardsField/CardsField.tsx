@@ -7,6 +7,7 @@ import { CardDetailed } from '../CardDetailed/CardDetailed';
 import {
   setDetailedCards,
   removeDetailedCards,
+  removeDetailedAllCards
 } from '../CardDetailed/CardDetailedSlice';
 import { RootState } from '../../store';
 
@@ -49,6 +50,9 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
     }
   }
 
+  function handleClearButtonClick() {
+    dispatch(removeDetailedAllCards());
+  }
   const selectedCardsCount = Number(detailedCards.length);
 
   return (
@@ -74,6 +78,9 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
         <div className="footer">
           <div className="footer__content">
             <span>selected cards: {selectedCardsCount}</span>
+            <button className="button__clear" onClick={handleClearButtonClick}>
+              clear
+            </button>
           </div>
         </div>
       )}

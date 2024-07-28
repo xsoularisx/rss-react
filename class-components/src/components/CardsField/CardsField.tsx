@@ -49,6 +49,8 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
     }
   }
 
+  const selectedCardsCount = Number(detailedCards.length);
+
   return (
     <div className="main">
       <h1 className="title">starships</h1>
@@ -68,6 +70,13 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
           ))}
         </div>
       </div>
+      {selectedCardsCount > 0 && (
+        <div className="footer">
+          <div className="footer__content">
+            <span>selected cards: {selectedCardsCount}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

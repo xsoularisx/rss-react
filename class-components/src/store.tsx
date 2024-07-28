@@ -14,7 +14,8 @@ export type AppDispatch = typeof store.dispatch;
 export type RootState = {
   starships: Starship[];
   mainPage: MainPageState;
-  detailedCard: Starship;
+  detailedCard: {
+    data: Starship[];
+  };
 };
-
 export default store;

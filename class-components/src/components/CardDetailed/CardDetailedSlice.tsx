@@ -17,7 +17,7 @@ const cardDetailedSlice = createSlice({
     removeDetailedCards: (state, action: PayloadAction<string>) => {
       state.data = state.data.filter(card => card.url !== action.payload);
     },
-    removeDetailedAllCards: (state) => {
+    removeDetailedAllCards: state => {
       state.data = [];
     },
   },

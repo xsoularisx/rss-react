@@ -28,14 +28,14 @@ export interface FetchStarshipsResponse {
 }
 
 export interface Starship {
-  map(
+  map?(
     arg0: (starship: Starship) => import('react/jsx-runtime').JSX.Element,
   ): import('react').ReactNode;
-  some(arg0: (card: { url: string }) => boolean): unknown;
-  data: Starship;
+  some?(arg0: (card: { url: string }) => boolean): unknown;
+  data?: Starship;
   url?: string;
-  name: string;
-  model: string;
+  name?: string;
+  model?: string;
   manufacturer?: string;
   cost_in_credits?: string;
   length?: string;

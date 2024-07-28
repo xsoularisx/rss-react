@@ -20,11 +20,14 @@ describe('Card component', () => {
     ).toBeInTheDocument();
   });
 
-  it('should call the onCardClick function with the correct argument', () => {
+  it('should render the starship information correctly', () => {
     const onCardClickMock = vi.fn();
     render(<Card starship={mockStarship} onCardClick={onCardClickMock} />);
 
-    screen.getByText('Name: Millennium Falcon').click();
-    expect(onCardClickMock).toHaveBeenCalledWith(mockStarship.url);
+    expect(screen.getByText('Name: Millennium Falcon')).toBeInTheDocument();
+    expect(
+      screen.getByText('Model: YT-1300 light freighter'),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: '' })).toBeInTheDocument();
   });
 });

@@ -7,14 +7,14 @@ import { CardDetailed } from '../CardDetailed/CardDetailed';
 import {
   setDetailedCards,
   removeDetailedCards,
-  removeDetailedAllCards
+  removeDetailedAllCards,
 } from '../CardDetailed/CardDetailedSlice';
 import { RootState } from '../../store';
 
 export function CardsField({ starships, loading, error }: MainPageProps) {
   const dispatch = useDispatch();
   const detailedCards = useSelector(
-    (state: RootState) => state.detailedCard.data,
+    (state: RootState) => state.detailedCard.data ?? [],
   );
 
   if (loading) {
@@ -39,7 +39,7 @@ export function CardsField({ starships, loading, error }: MainPageProps) {
       const response = await fetch(url);
       const data = await response.json();
       if (
-        detailedCards.some((card: { url: string }) => card.url === data.url)
+        detailedCards.some((starship: Starship) => starship.url === data.url)
       ) {
         dispatch(removeDetailedCards(data.url));
       } else {

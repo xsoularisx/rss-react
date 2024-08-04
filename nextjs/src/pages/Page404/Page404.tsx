@@ -1,11 +1,14 @@
-import './Page404.scss';
-import { useNavigate } from 'react-router-dom';
+'use client';
+import { useRouter } from 'next/navigation';
+import './Page404.scss'
 
 export function Page404() {
-  const navigate = useNavigate();
+  const router = useRouter();
+
   function returnMainPage() {
-    navigate('/');
+    router.push('/');
   }
+
   return (
     <div className="page404">
       <h1 className="page404__title">404</h1>

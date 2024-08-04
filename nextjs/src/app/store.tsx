@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import mainPageReducer from './pages/MainPage/MainPageSlice';
-import detailedCardReducer from './components/CardDetailed/CardDetailedSlice';
-import { MainPageState, Starship } from './interfaces/intrefaces';
+import mainPageReducer from '../pages/MainPage/MainPageSlice';
+import detailedCardReducer from '../components/CardDetailed/CardDetailedSlice';
+import { MainPageState, Starship } from '../interfaces/intrefaces';
 
 const store = configureStore({
   reducer: {

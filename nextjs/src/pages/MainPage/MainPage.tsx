@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardsField } from '../../components/CardsField/CardsField';
 import { SearchField } from '../../components/SearchField/SearchField';
@@ -18,30 +18,30 @@ import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
 import { ThemeContext } from '../../components/ThemeProvider/ThemeProvider';
 
 export function MainPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get('page') || '1', 10);
-  const query =
-    searchParams.get('query') || localStorage.getItem('lastSearchQuery') || '';
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const page = parseInt(searchParams.get('page') || '1', 10);
+  // const query =
+  //   searchParams.get('query') || localStorage.getItem('lastSearchQuery') || '';
 
-  const dispatch =
-    useDispatch<ThunkDispatch<unknown, FetchStarshipsParams, AnyAction>>();
-  const starships = useSelector(selectStarships);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  const count = useSelector(selectCount);
+  // const dispatch =
+  //   useDispatch<ThunkDispatch<unknown, FetchStarshipsParams, AnyAction>>();
+  // const starships = useSelector(selectStarships);
+  // const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
+  // const count = useSelector(selectCount);
 
-  useEffect(() => {
-    dispatch(fetchStarships({ query, page }));
-  }, [dispatch, query, page]);
+  // useEffect(() => {
+  //   dispatch(fetchStarships({ query, page }));
+  // }, [dispatch, query, page]);
 
-  const handlePageChange = (newPage: number) => {
-    setSearchParams({ query, page: newPage.toString() });
-  };
+  // const handlePageChange = (newPage: number) => {
+  //   setSearchParams({ query, page: newPage.toString() });
+  // };
 
-  const handleSearch = (newQuery: string) => {
-    localStorage.setItem('lastSearchQuery', newQuery);
-    setSearchParams({ query: newQuery, page: '1' });
-  };
+  // const handleSearch = (newQuery: string) => {
+  //   localStorage.setItem('lastSearchQuery', newQuery);
+  //   setSearchParams({ query: newQuery, page: '1' });
+  // };
 
   const { theme } = useContext(ThemeContext);
 
@@ -49,7 +49,7 @@ export function MainPage() {
     <div className={`${theme}`}>
       <ErrorButton />
       <ThemeToggle />
-      <SearchField onSearch={handleSearch} />
+      {/* <SearchField onSearch={handleSearch} />
       <Pagination
         count={count}
         currentPage={page}
@@ -60,7 +60,7 @@ export function MainPage() {
         loading={loading}
         error={error}
         searchResults={[]}
-      />
+      /> */}
     </div>
   );
 }

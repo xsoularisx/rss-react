@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import './Page404.scss'
+import './Page404.scss';
 
 export function Page404() {
   const router = useRouter();

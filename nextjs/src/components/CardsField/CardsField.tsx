@@ -9,7 +9,7 @@ import {
   removeDetailedCards,
   removeDetailedAllCards,
 } from '../CardDetailed/CardDetailedSlice';
-import { RootState } from '../../store';
+import { RootState } from '../../app/store';
 
 export function CardsField({ starships, loading, error }: MainPageProps) {
   const dispatch = useDispatch();

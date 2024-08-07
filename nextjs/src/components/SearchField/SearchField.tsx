@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import './SearchField.scss';
 
 interface SearchFieldProps {
@@ -6,23 +7,24 @@ interface SearchFieldProps {
 }
 
 export function SearchField({ onSearch }: SearchFieldProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    const query = searchParams?.get('query') || localStorage.getItem('lastSearchQuery') || '';
+    setSearchQuery(query);
+  }, [searchParams]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
   const handleSearch = () => {
-    localStorage.setItem('searchQuery', searchQuery);
+    localStorage.setItem('lastSearchQuery', searchQuery);
     onSearch(searchQuery);
+    router.push(`/?query=${searchQuery}`);
   };
-
-  useEffect(() => {
-    const storedQuery = localStorage.getItem('searchQuery');
-    if (storedQuery) {
-      setSearchQuery(storedQuery);
-    }
-  }, []);
 
   return (
     <>

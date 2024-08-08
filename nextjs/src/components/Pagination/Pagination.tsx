@@ -1,5 +1,5 @@
 import { PaginationProps } from '../../interfaces/intrefaces';
-import { useNavigate } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 import './Pagination.scss';
 
 export function Pagination({
@@ -9,11 +9,13 @@ export function Pagination({
 }: PaginationProps) {
   const itemsPerPage = 10;
   const totalPages = Math.ceil(count / itemsPerPage);
-  const navigate = useNavigate();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   function handlePageChange(pageNumber: number) {
-    navigate(`?page=${pageNumber}`);
     onPageChange(pageNumber);
+    const query = searchParams?.get('query') || localStorage.getItem('lastSearchQuery') || '';
+    router.push(`?query=${query}&page=${pageNumber}`);
   }
 
   function renderPageNumbers() {

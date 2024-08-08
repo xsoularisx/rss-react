@@ -86,3 +86,7 @@ export interface ThemeContextType {
 export interface CardDetailedState {
   data: Starship[];
 }
+
+export interface SearchFieldState {
+  onSearch: (query: string) => void;
+}

@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { SearchFieldState } from '@/interfaces/intrefaces';
 import './SearchField.scss';
 
-interface SearchFieldProps {
-  onSearch: (query: string) => void;
-}
-
-export function SearchField({ onSearch }: SearchFieldProps) {
+export function SearchField({ onSearch }: SearchFieldState) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -23,7 +20,7 @@ export function SearchField({ onSearch }: SearchFieldProps) {
   const handleSearch = () => {
     localStorage.setItem('lastSearchQuery', searchQuery);
     onSearch(searchQuery);
-    router.push(`/?query=${searchQuery}`);
+    router.push(`?query=${searchQuery}&page=1`);
   };
 
   return (

@@ -15,6 +15,7 @@ import { FetchStarshipsParams } from '../../interfaces/intrefaces';
 import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
 import { ThemeContext } from '../../components/ThemeProvider/ThemeProvider';
 import { SearchField } from '@/components/SearchField/SearchField';
+import { Pagination } from '@/components/Pagination/Pagination';
 
 export function MainPage() {
   const router = useRouter();
@@ -34,6 +35,10 @@ export function MainPage() {
     dispatch(fetchStarships({ query: queryParam, page }));
   }, [dispatch, queryParam, page]);
 
+  const handlePageChange = (newPage: number) => {
+    dispatch(fetchStarships({ query: '', page: newPage }));
+  };
+
   const handleSearch = (newQuery: string) => {
     dispatch(fetchStarships({ query: newQuery, page: 1 }));
   };
@@ -43,6 +48,11 @@ export function MainPage() {
       <ErrorButton />
       <ThemeToggle />
       <SearchField onSearch={handleSearch} />
+      <Pagination
+        count={count}
+        currentPage={page}
+        onPageChange={handlePageChange}
+      />
       <CardsField
         starships={starships}
         loading={loading}

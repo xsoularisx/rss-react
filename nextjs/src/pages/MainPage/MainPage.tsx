@@ -14,16 +14,18 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { FetchStarshipsParams } from '../../interfaces/intrefaces';
 import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
 import { ThemeContext } from '../../components/ThemeProvider/ThemeProvider';
-import { SearchField } from '@/components/SearchField/SearchField';
-import { Pagination } from '@/components/Pagination/Pagination';
+import { SearchField } from '../../components/SearchField/SearchField';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 export function MainPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const page = parseInt(searchParams?.get('page') || '1', 10);
-  const queryParam = searchParams?.get('query') || localStorage.getItem('lastSearchQuery') || '';
+  const queryParam =
+    searchParams?.get('query') || localStorage.getItem('lastSearchQuery') || '';
 
-  const dispatch = useDispatch<ThunkDispatch<unknown, FetchStarshipsParams, AnyAction>>();
+  const dispatch =
+    useDispatch<ThunkDispatch<unknown, FetchStarshipsParams, AnyAction>>();
   const starships = useSelector(selectStarships);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);

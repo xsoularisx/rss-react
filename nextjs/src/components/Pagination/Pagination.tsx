@@ -14,7 +14,10 @@ export function Pagination({
 
   function handlePageChange(pageNumber: number) {
     onPageChange(pageNumber);
-    const query = searchParams?.get('query') || localStorage.getItem('lastSearchQuery') || '';
+    const query =
+      searchParams?.get('query') ||
+      localStorage.getItem('lastSearchQuery') ||
+      '';
     router.push(`?query=${query}&page=${pageNumber}`);
   }
 

@@ -1,9 +1,11 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  formData: {
-    name: '',
-  },
+interface FormData {
+  name: string;
+}
+
+const initialState: { formData: FormData[] } = {
+  formData: [],
 };
 
 const formSlice = createSlice({
@@ -11,10 +13,10 @@ const formSlice = createSlice({
   initialState,
   reducers: {
     setFormData(state, action) {
-      state.formData = action.payload;
+      state.formData.push(action.payload);
     },
     resetFormData(state) {
-      state.formData = { name: '' };
+      state.formData = [];
     },
   },
 });

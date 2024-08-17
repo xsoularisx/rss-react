@@ -1,29 +1,24 @@
 import './MainPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { resetFormData } from '../../store';
 
 interface RootState {
   form: {
     formData: {
       name: string;
-    };
+    }[];
   };
 }
 
 export function MainPage() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const formData = useSelector((state: RootState) => state.form.formData);
 
   function goFormOne() {
-    dispatch(resetFormData());
     navigate('/formone');
   }
 
   function goFormTwo() {
-    dispatch(resetFormData());
     navigate('/formtwo');
   }
 
@@ -39,11 +34,26 @@ export function MainPage() {
         </button>
       </div>
       <div>
-        {formData?.name && (
+        {formData.length > 0 ? (
           <>
             <h1 className="main__title">добро пожаловать</h1>
-            <p className="main__txt">имя: {formData.name}</p>
+            <div className="main__list">
+              {formData.map((item, index) => (
+                <div
+                  key={index}
+                  className={
+                    index === formData.length - 1
+                      ? 'main__item main__item-last'
+                      : 'main__item'
+                  }
+                >
+                  <p className="main__txt">имя: {item.name}</p>
+                </div>
+              ))}
+            </div>
           </>
+        ) : (
+          <p className="main__error">нет пользователей</p>
         )}
       </div>
     </div>

@@ -11,7 +11,27 @@
     width: 100%;
   }
 
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    &-last {
+      color: rgb(46, 125, 50);
+    }
+  }
+
   &__txt {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  &__error {
+    margin-top: 20px;
     font-size: 24px;
     line-height: 36px;
   }

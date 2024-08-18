@@ -57,12 +57,14 @@
 }
 
 .form {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &__item {
+    margin-bottom: 40px;
     width: 500px;
-    position: relative;
   }
 
   &__label {
@@ -115,11 +117,11 @@
   }
 
   &__error {
+    position: absolute;
     padding: 10px 15px;
     color: rgb(211, 47, 47);
     font-size: 16px;
     line-height: 20px;
-    position: absolute;
   }
 
   &-disabled {

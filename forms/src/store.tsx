@@ -2,6 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 interface FormData {
   name: string;
+  age: string;
 }
 
 const initialState: { formData: FormData[] } = {

@@ -13,6 +13,10 @@ export function FormTwo() {
     name: Yup.string()
       .matches(/^[A-ZА-Я]/, 'имя должно начинаться с заглавной буквы')
       .required('это поле обязательно'),
+    age: Yup.number()
+      .positive('возраст должен быть положительным числом')
+      .integer('возраст должен быть целым числом')
+      .required('это поле обязательно'),
   });
 
   const {
@@ -24,7 +28,7 @@ export function FormTwo() {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: object) => {
+  const onSubmit = (data: { name: string; age: number }) => {
     dispatch(setFormData(data));
     navigate('/');
   };
@@ -55,10 +59,31 @@ export function FormTwo() {
               <p className="form__error">{errors.name.message}</p>
             )}
           </div>
+          <div className="form__item">
+            <label className="form__label" htmlFor="age">
+              Возраст:
+            </label>
+            <Controller
+              name="age"
+              control={control}
+              defaultValue={0}
+              render={({ field }) => (
+                <input
+                  className="form__input"
+                  type="number"
+                  id="age"
+                  {...field}
+                />
+              )}
+            />
+            {errors.age && <p className="form__error">{errors.age.message}</p>}
+          </div>
         </div>
-        <button className={`form__button ${!isValid ? 'form-disabled' : ''}`}
+        <button
+          className={`form__button ${!isValid ? 'form-disabled' : ''}`}
           type="submit"
-          disabled={!isValid} >
+          disabled={!isValid}
+        >
           отправить
         </button>
       </form>

@@ -6,6 +6,7 @@ interface RootState {
   form: {
     formData: {
       name: string;
+      age: string;
     }[];
   };
 }
@@ -48,6 +49,7 @@ export function MainPage() {
                   }
                 >
                   <p className="main__txt">имя: {item.name}</p>
+                  <p className="main__txt">возраст: {item.age}</p>
                 </div>
               ))}
             </div>

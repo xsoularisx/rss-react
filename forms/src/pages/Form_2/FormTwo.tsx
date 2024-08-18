@@ -18,9 +18,10 @@ export function FormTwo() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(validationSchema),
+    mode: 'onChange',
   });
 
   const onSubmit = (data: object) => {
@@ -55,7 +56,9 @@ export function FormTwo() {
             )}
           </div>
         </div>
-        <button className="form__button" type="submit">
+        <button className={`form__button ${!isValid ? 'form-disabled' : ''}`}
+          type="submit"
+          disabled={!isValid} >
           отправить
         </button>
       </form>

@@ -121,4 +121,16 @@
     line-height: 20px;
     position: absolute;
   }
+
+  &-disabled {
+    cursor: auto;
+    color: #444950;
+    background-color: #d5dbe4;
+    border: 1px solid #444950;
+
+    &:hover {
+      background-color: #d5dbe4;
+      border: 1px solid #444950;
+    }
+  }
 }

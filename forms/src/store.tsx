@@ -1,16 +1,13 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { StoreState } from './interfaces/interfaces';
 
-interface FormData {
-  name: string;
-  age: string;
-}
-
-const initialState: { formData: FormData[] } = {
+const initialState: StoreState = {
   formData: [],
+  countries: ['Russia', 'Belarus', 'Poland'],
 };
 
 const formSlice = createSlice({
-  name: 'formone',
+  name: 'form',
   initialState,
   reducers: {
     setFormData(state, action) {

@@ -1,15 +1,7 @@
 import './MainPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-interface RootState {
-  form: {
-    formData: {
-      name: string;
-      age: string;
-    }[];
-  };
-}
+import { RootState } from '../../interfaces/interfaces';
 
 export function MainPage() {
   const navigate = useNavigate();
@@ -48,14 +40,18 @@ export function MainPage() {
                       : 'main__item'
                   }
                 >
-                  <p className="main__txt">имя: {item.name}</p>
-                  <p className="main__txt">возраст: {item.age}</p>
+                  <p className="main__txt">name: {item.name}</p>
+                  <p className="main__txt">age: {item.age}</p>
+                  <p className="main__txt">email: {item.email}</p>
+                  <p className="main__txt">password: {item.password}</p>
+                  <p className="main__txt">gender: {item.gender}</p>
+                  <p className="main__txt">country: {item.country}</p>
                 </div>
               ))}
             </div>
           </>
         ) : (
-          <p className="main__error">нет пользователей</p>
+          <p className="main__error">no users</p>
         )}
       </div>
     </div>

@@ -1,4 +1,3 @@
-import './FormOne.scss';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -44,21 +43,21 @@ export function FormOne() {
     <div className="container">
       <h1 className="main__title">form one</h1>
       <form onSubmit={handleSubmit}>
-        <div className="formone">
-          <div className="formone__item">
-            <label className="formone__label" htmlFor="name">
+        <div className="form">
+          <div className="form__item">
+            <label className="form__label" htmlFor="name">
               Имя:
             </label>
             <input
-              className="formone__input"
+              className="form__input"
               type="text"
               id="name"
               ref={nameRef}
             />
-            {nameError && <p className="formone__error">{nameError}</p>}
+            {nameError && <p className="form__error">{nameError}</p>}
           </div>
         </div>
-        <button className="formone__button" type="submit">
+        <button className="form__button" type="submit">
           отправить
         </button>
       </form>

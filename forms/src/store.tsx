@@ -4,6 +4,15 @@ import { StoreState } from './interfaces/interfaces';
 const initialState: StoreState = {
   formData: [],
   countries: ['Russia', 'Belarus', 'Poland'],
+  form: {
+    name: '',
+    age: null,
+    email: '',
+    password: '',
+    confirmPassword: '',
+    gender: 'male',
+    country: '',
+  },
 };
 
 const formSlice = createSlice({
